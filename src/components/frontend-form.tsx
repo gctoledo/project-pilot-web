@@ -99,25 +99,28 @@ const FrontendForm = () => {
       extra_technologies: frontend.extra_technologies,
     },
   });
-
-  //! PRECISO FAZER QUE QUANDO O USUARIO ALTERE ALGUM INPUT
-  //! ALTERE O ESTADO DO ZUSTAND EM TEMPO REAL
-  //! AO INVES DE APENAS QUANDO DER SUBMIT
-  const onSubmit = (data: FrontendFormSchema) => {
-    console.log(data);
+  const onSubmit = () => {
+    next();
   };
 
   return (
     <form className="space-y-5">
       <h2 className="text-center text-lg">
-        Qual tecnologia front-end deseja utilizar?
+        Qual tecnologia <span className="text-primary">front-end</span> deseja
+        utilizar?
       </h2>
 
       <Controller
         name="technology"
         control={form.control}
         render={({ field }) => (
-          <Select onValueChange={field.onChange} value={field.value}>
+          <Select
+            onValueChange={(value) => {
+              field.onChange(value);
+              setFrontend.technology(value as FrontendTechnologies);
+            }}
+            value={field.value}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Selecione uma tecnologia" />
             </SelectTrigger>
@@ -139,7 +142,10 @@ const FrontendForm = () => {
           <div className="flex items-center gap-2">
             <Checkbox
               checked={field.value}
-              onCheckedChange={(checked) => field.onChange(!!checked)}
+              onCheckedChange={(checked) => {
+                field.onChange(!!checked);
+                setFrontend.typescript(!!checked);
+              }}
               id="typescript"
             />
             <label className="text-sm" htmlFor="typescript">
@@ -165,8 +171,15 @@ const FrontendForm = () => {
                 const handleChange = (checked: boolean) => {
                   if (checked) {
                     field.onChange([...(field.value || []), option.value]);
+                    setFrontend.extra_technologies([
+                      ...(field.value || []),
+                      option.value,
+                    ]);
                   } else {
                     field.onChange(
+                      (field.value || []).filter((v) => v !== option.value),
+                    );
+                    setFrontend.extra_technologies(
                       (field.value || []).filter((v) => v !== option.value),
                     );
                   }
