@@ -1,0 +1,32 @@
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Button } from "./ui/button";
+import { useFormStore } from "@/store/form";
+
+const FormActions = () => {
+  const back = useFormStore((state) => state.back);
+  const next = useFormStore((state) => state.next);
+
+  return (
+    <div className="flex w-full items-center justify-between">
+      <Button
+        variant={"ghost"}
+        className="flex cursor-pointer items-center gap-2 text-sm"
+        onClick={back}
+      >
+        <ArrowLeft size={20} />
+        Voltar
+      </Button>
+
+      <Button
+        variant={"ghost"}
+        className="flex cursor-pointer items-center gap-2 text-sm"
+        onClick={next}
+      >
+        Continuar
+        <ArrowRight size={20} />
+      </Button>
+    </div>
+  );
+};
+
+export default FormActions;

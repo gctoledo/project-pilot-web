@@ -1,10 +1,9 @@
+import { useFormStore } from "@/store/form";
 import { Button } from "./ui/button";
 
-interface HomeProps {
-  setCurrentStep: (step: number) => void;
-}
+const Home = () => {
+  const setCurrentStep = useFormStore((state) => state.setCurrentStep);
 
-const Home = ({ setCurrentStep }: HomeProps) => {
   return (
     <div className="w-full max-w-2xl text-center">
       <h1 className="mb-3 text-3xl font-bold">Project Pilot</h1>
