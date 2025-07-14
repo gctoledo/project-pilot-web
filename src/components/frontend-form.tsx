@@ -15,6 +15,7 @@ import {
   FrontendTechnologies,
 } from "@/types/frontend_technologies";
 import { useFormStore } from "@/store/useFormStore";
+import { motion } from "framer-motion";
 
 const TECHNOLOGY_OPTIONS = [
   {
@@ -104,107 +105,113 @@ const FrontendForm = () => {
   };
 
   return (
-    <form className="space-y-5">
-      <h2 className="text-center text-lg">
-        Qual tecnologia <span className="text-primary">front-end</span> deseja
-        utilizar?
-      </h2>
+    <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <form className="space-y-5">
+        <h2 className="text-center text-lg">
+          Qual tecnologia <span className="text-primary">front-end</span> deseja
+          utilizar?
+        </h2>
 
-      <Controller
-        name="technology"
-        control={form.control}
-        render={({ field }) => (
-          <Select
-            onValueChange={(value) => {
-              field.onChange(value);
-              setFrontend.technology(value as FrontendTechnologies);
-            }}
-            value={field.value}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Selecione uma tecnologia" />
-            </SelectTrigger>
-            <SelectContent>
-              {TECHNOLOGY_OPTIONS.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
-      />
-
-      <Controller
-        name="typescript"
-        control={form.control}
-        render={({ field }) => (
-          <div className="flex items-center gap-2">
-            <Checkbox
-              checked={field.value}
-              onCheckedChange={(checked) => {
-                field.onChange(!!checked);
-                setFrontend.typescript(!!checked);
+        <Controller
+          name="technology"
+          control={form.control}
+          render={({ field }) => (
+            <Select
+              onValueChange={(value) => {
+                field.onChange(value);
+                setFrontend.technology(value as FrontendTechnologies);
               }}
-              id="typescript"
-            />
-            <label className="text-sm" htmlFor="typescript">
-              Deseja utilizar TypeScript?
-            </label>
+              value={field.value}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Selecione uma tecnologia" />
+              </SelectTrigger>
+              <SelectContent>
+                {TECHNOLOGY_OPTIONS.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+
+        <Controller
+          name="typescript"
+          control={form.control}
+          render={({ field }) => (
+            <div className="flex items-center gap-2">
+              <Checkbox
+                checked={field.value}
+                onCheckedChange={(checked) => {
+                  field.onChange(!!checked);
+                  setFrontend.typescript(!!checked);
+                }}
+                id="typescript"
+              />
+              <label className="text-sm" htmlFor="typescript">
+                Deseja utilizar TypeScript?
+              </label>
+            </div>
+          )}
+        />
+
+        <div>
+          <p className="mb-2 text-sm font-medium">
+            Gostaria de utilizar mais alguma tecnologia?
+          </p>
+
+          <div className="grid grid-cols-3 gap-2">
+            {EXTRA_TECHNOLOGY_OPTIONS.map((option) => (
+              <Controller
+                key={option.value}
+                name="extra_technologies"
+                control={form.control}
+                render={({ field }) => {
+                  const isChecked = field.value?.includes(option.value);
+                  const handleChange = (checked: boolean) => {
+                    if (checked) {
+                      field.onChange([...(field.value || []), option.value]);
+                      setFrontend.extra_technologies([
+                        ...(field.value || []),
+                        option.value,
+                      ]);
+                    } else {
+                      field.onChange(
+                        (field.value || []).filter((v) => v !== option.value),
+                      );
+                      setFrontend.extra_technologies(
+                        (field.value || []).filter((v) => v !== option.value),
+                      );
+                    }
+                  };
+
+                  return (
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        checked={isChecked}
+                        onCheckedChange={(checked) => handleChange(!!checked)}
+                        id={option.value}
+                      />
+                      <label className="text-sm" htmlFor={option.value}>
+                        {option.label}
+                      </label>
+                    </div>
+                  );
+                }}
+              />
+            ))}
           </div>
-        )}
-      />
-
-      <div>
-        <p className="mb-2 text-sm font-medium">
-          Gostaria de utilizar mais alguma tecnologia?
-        </p>
-
-        <div className="grid grid-cols-3 gap-2">
-          {EXTRA_TECHNOLOGY_OPTIONS.map((option) => (
-            <Controller
-              key={option.value}
-              name="extra_technologies"
-              control={form.control}
-              render={({ field }) => {
-                const isChecked = field.value?.includes(option.value);
-                const handleChange = (checked: boolean) => {
-                  if (checked) {
-                    field.onChange([...(field.value || []), option.value]);
-                    setFrontend.extra_technologies([
-                      ...(field.value || []),
-                      option.value,
-                    ]);
-                  } else {
-                    field.onChange(
-                      (field.value || []).filter((v) => v !== option.value),
-                    );
-                    setFrontend.extra_technologies(
-                      (field.value || []).filter((v) => v !== option.value),
-                    );
-                  }
-                };
-
-                return (
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      checked={isChecked}
-                      onCheckedChange={(checked) => handleChange(!!checked)}
-                      id={option.value}
-                    />
-                    <label className="text-sm" htmlFor={option.value}>
-                      {option.label}
-                    </label>
-                  </div>
-                );
-              }}
-            />
-          ))}
         </div>
-      </div>
 
-      <FormActions onNext={form.handleSubmit(onSubmit)} />
-    </form>
+        <FormActions onNext={form.handleSubmit(onSubmit)} />
+      </form>
+    </motion.div>
   );
 };
 

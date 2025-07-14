@@ -18,7 +18,10 @@ const FormActions = ({ onBack, onNext }: FormActionsProps) => {
       <Button
         variant={"ghost"}
         className="flex cursor-pointer items-center gap-2 text-sm"
-        onClick={onBack || back}
+        onClick={() => {
+          onBack?.();
+          back();
+        }}
         type="button"
       >
         <ArrowLeft size={20} />
@@ -38,7 +41,10 @@ const FormActions = ({ onBack, onNext }: FormActionsProps) => {
         <Button
           variant={"ghost"}
           className="flex cursor-pointer items-center gap-2 text-sm"
-          onClick={onNext || next}
+          onClick={() => {
+            onNext?.();
+            next();
+          }}
           type="submit"
           disabled={currentStep === MAX_STEP}
         >

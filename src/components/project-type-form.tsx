@@ -2,6 +2,7 @@ import { ProjectType } from "@/types/project_types";
 import { Button } from "./ui/button";
 import { useFormStore } from "@/store/useFormStore";
 import FormActions from "./form-actions";
+import { motion } from "framer-motion";
 
 const PROJECT_TYPES_OPTIONS = [
   {
@@ -23,7 +24,12 @@ const ProjectTypeForm = () => {
   const actType = useFormStore((state) => state.type);
 
   return (
-    <div className="space-y-4">
+    <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="space-y-4"
+    >
       <h2 className="text-center text-lg">
         Qual tipo de projeto você quer criar?
       </h2>
@@ -41,7 +47,7 @@ const ProjectTypeForm = () => {
       </div>
 
       <FormActions />
-    </div>
+    </motion.div>
   );
 };
 

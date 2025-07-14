@@ -1,11 +1,17 @@
 import { useFormStore } from "@/store/useFormStore";
 import { Button } from "./ui/button";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const setCurrentStep = useFormStore((state) => state.setCurrentStep);
 
   return (
-    <div className="w-full max-w-2xl text-center">
+    <motion.div
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="w-full max-w-2xl text-center"
+    >
       <h1 className="mb-3 text-3xl font-bold">
         <span className="text-primary">P</span>roject{" "}
         <span className="text-primary">P</span>ilot
@@ -24,7 +30,7 @@ const Home = () => {
       <Button className="mt-5 font-bold" onClick={() => setCurrentStep(1)}>
         Começar
       </Button>
-    </div>
+    </motion.div>
   );
 };
 
