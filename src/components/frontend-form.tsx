@@ -14,7 +14,7 @@ import {
   ExtraFrontendTechnologies,
   FrontendTechnologies,
 } from "@/types/frontend_technologies";
-import { useFormStore } from "@/store/form";
+import { useFormStore } from "@/store/useFormStore";
 
 const TECHNOLOGY_OPTIONS = [
   {

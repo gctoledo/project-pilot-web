@@ -1,4 +1,4 @@
-import { useFormStore } from "@/store/form";
+import { useFormStore } from "@/store/useFormStore";
 import { Button } from "./ui/button";
 
 const Home = () => {

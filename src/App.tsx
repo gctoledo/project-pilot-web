@@ -1,7 +1,7 @@
 import FrontendForm from "./components/frontend-form";
 import Home from "./components/home";
 import ProjectTypeForm from "./components/project-type-form";
-import { useFormStore } from "./store/form";
+import { useFormStore } from "./store/useFormStore";
 
 const App = () => {
   const currentStep = useFormStore((state) => state.currentStep);

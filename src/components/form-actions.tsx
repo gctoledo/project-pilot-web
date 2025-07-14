@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
-import { useFormStore } from "@/store/form";
+import { useFormStore } from "@/store/useFormStore";
 
 interface FormActionsProps {
   onBack?: () => void;

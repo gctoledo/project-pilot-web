@@ -1,6 +1,6 @@
 import { ProjectType } from "@/types/project_types";
 import { Button } from "./ui/button";
-import { useFormStore } from "@/store/form";
+import { useFormStore } from "@/store/useFormStore";
 import FormActions from "./form-actions";
 
 const PROJECT_TYPES_OPTIONS = [
