@@ -16,64 +16,10 @@ import {
 } from "@/types/frontend_technologies";
 import { useFormStore } from "@/store/useFormStore";
 import { motion } from "framer-motion";
-
-const TECHNOLOGY_OPTIONS = [
-  {
-    label: "HTML / CSS / JavaScript (Vanilla)",
-    value: FrontendTechnologies.html_css_js,
-  },
-  {
-    label: "React.js",
-    value: FrontendTechnologies.react,
-  },
-  {
-    label: "Next.js",
-    value: FrontendTechnologies.next,
-  },
-  {
-    label: "Vue.js",
-    value: FrontendTechnologies.vue,
-  },
-  {
-    label: "Nuxt.js",
-    value: FrontendTechnologies.nuxt,
-  },
-  {
-    label: "Angular",
-    value: FrontendTechnologies.angular,
-  },
-  {
-    label: "Svelte",
-    value: FrontendTechnologies.svelte,
-  },
-];
-
-const EXTRA_TECHNOLOGY_OPTIONS = [
-  {
-    label: "Tailwind CSS",
-    value: ExtraFrontendTechnologies.tailwindcss,
-  },
-  {
-    label: "Bootstrap",
-    value: ExtraFrontendTechnologies.bootstrap,
-  },
-  {
-    label: "Material UI",
-    value: ExtraFrontendTechnologies.material_ui,
-  },
-  {
-    label: "Shadcn UI",
-    value: ExtraFrontendTechnologies.shadcn_ui,
-  },
-  {
-    label: "Sass",
-    value: ExtraFrontendTechnologies.sass,
-  },
-  {
-    label: "Styled Components",
-    value: ExtraFrontendTechnologies.styled_components,
-  },
-];
+import {
+  FRONTEND_EXTRA_TECHNOLOGIES_LABEL,
+  FRONTEND_TECHNOLOGIES_LABEL,
+} from "@/constants/frontend";
 
 const ExtraFrontendTechnologiesSchema = z.enum(
   Object.values(ExtraFrontendTechnologies),
@@ -127,9 +73,9 @@ const FrontendForm = () => {
                 <SelectValue placeholder="Selecione uma tecnologia" />
               </SelectTrigger>
               <SelectContent>
-                {TECHNOLOGY_OPTIONS.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
+                {Object.values(FrontendTechnologies).map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {FRONTEND_TECHNOLOGIES_LABEL[option]}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -163,26 +109,26 @@ const FrontendForm = () => {
           </p>
 
           <div className="grid grid-cols-3 gap-2">
-            {EXTRA_TECHNOLOGY_OPTIONS.map((option) => (
+            {Object.values(ExtraFrontendTechnologies).map((option) => (
               <Controller
-                key={option.value}
+                key={option}
                 name="extra_technologies"
                 control={form.control}
                 render={({ field }) => {
-                  const isChecked = field.value?.includes(option.value);
+                  const isChecked = field.value?.includes(option);
                   const handleChange = (checked: boolean) => {
                     if (checked) {
-                      field.onChange([...(field.value || []), option.value]);
+                      field.onChange([...(field.value || []), option]);
                       setFrontend.extra_technologies([
                         ...(field.value || []),
-                        option.value,
+                        option,
                       ]);
                     } else {
                       field.onChange(
-                        (field.value || []).filter((v) => v !== option.value),
+                        (field.value || []).filter((v) => v !== option),
                       );
                       setFrontend.extra_technologies(
-                        (field.value || []).filter((v) => v !== option.value),
+                        (field.value || []).filter((v) => v !== option),
                       );
                     }
                   };
@@ -192,10 +138,10 @@ const FrontendForm = () => {
                       <Checkbox
                         checked={isChecked}
                         onCheckedChange={(checked) => handleChange(!!checked)}
-                        id={option.value}
+                        id={option}
                       />
-                      <label className="text-sm" htmlFor={option.value}>
-                        {option.label}
+                      <label className="text-sm" htmlFor={option}>
+                        {FRONTEND_EXTRA_TECHNOLOGIES_LABEL[option]}
                       </label>
                     </div>
                   );
