@@ -1,3 +1,4 @@
+import FrontendForm from "./components/frontend-form";
 import Home from "./components/home";
 import ProjectTypeForm from "./components/project-type-form";
 import { useFormStore } from "./store/form";
@@ -10,6 +11,8 @@ const App = () => {
       {currentStep === 0 && <Home />}
 
       {currentStep === 1 && <ProjectTypeForm />}
+
+      {currentStep === 2 && <FrontendForm />}
     </div>
   );
 };

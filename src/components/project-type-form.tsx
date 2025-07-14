@@ -24,7 +24,9 @@ const ProjectTypeForm = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-center">Qual tipo de projeto você quer criar?</h2>
+      <h2 className="text-center text-lg">
+        Qual tipo de projeto você quer criar?
+      </h2>
 
       <div className="flex items-center gap-4">
         {PROJECT_TYPES_OPTIONS.map((option) => (
