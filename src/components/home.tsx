@@ -1,6 +1,7 @@
 import { useFormStore } from "@/store/useFormStore";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
+import { STEPS } from "@/store/slices/stepSlice";
 
 const Home = () => {
   const setCurrentStep = useFormStore((state) => state.setCurrentStep);
@@ -27,7 +28,10 @@ const Home = () => {
         codando.
       </p>
 
-      <Button className="mt-5 font-bold" onClick={() => setCurrentStep(1)}>
+      <Button
+        className="mt-5 font-bold"
+        onClick={() => setCurrentStep(STEPS.projectType)}
+      >
         Começar
       </Button>
     </motion.div>

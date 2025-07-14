@@ -1,6 +1,8 @@
 import FrontendForm from "./components/frontend-form";
 import Home from "./components/home";
 import ProjectTypeForm from "./components/project-type-form";
+import Review from "./components/review";
+import { STEPS } from "./store/slices/stepSlice";
 import { useFormStore } from "./store/useFormStore";
 
 const App = () => {
@@ -8,11 +10,13 @@ const App = () => {
 
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center p-4">
-      {currentStep === 0 && <Home />}
+      {currentStep === STEPS.initial && <Home />}
 
-      {currentStep === 1 && <ProjectTypeForm />}
+      {currentStep === STEPS.projectType && <ProjectTypeForm />}
 
-      {currentStep === 2 && <FrontendForm />}
+      {currentStep === STEPS.frontend && <FrontendForm />}
+
+      {currentStep === STEPS.review && <Review />}
     </div>
   );
 };

@@ -22,13 +22,6 @@ const PROJECT_TYPES_OPTIONS = [
 const ProjectTypeForm = () => {
   const setType = useFormStore((state) => state.setType);
   const actType = useFormStore((state) => state.type);
-  const setCurrentStep = useFormStore((state) => state.setCurrentStep);
-
-  const handleNext = () => {
-    if (actType === ProjectType.backend) {
-      setCurrentStep(3);
-    }
-  };
 
   return (
     <motion.div
@@ -53,7 +46,7 @@ const ProjectTypeForm = () => {
         ))}
       </div>
 
-      <FormActions onNext={handleNext} />
+      <FormActions />
     </motion.div>
   );
 };

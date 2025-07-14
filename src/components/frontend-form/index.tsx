@@ -90,7 +90,6 @@ type FrontendFormSchema = z.infer<typeof frontendFormSchema>;
 const FrontendForm = () => {
   const frontend = useFormStore((state) => state.frontend);
   const setFrontend = useFormStore((state) => state.setFrontend);
-  const next = useFormStore((state) => state.next);
 
   const form = useForm<FrontendFormSchema>({
     resolver: zodResolver(frontendFormSchema),
@@ -100,9 +99,6 @@ const FrontendForm = () => {
       extra_technologies: frontend.extra_technologies,
     },
   });
-  const onSubmit = () => {
-    next();
-  };
 
   return (
     <motion.div
@@ -209,7 +205,7 @@ const FrontendForm = () => {
           </div>
         </div>
 
-        <FormActions onNext={form.handleSubmit(onSubmit)} />
+        <FormActions />
       </form>
     </motion.div>
   );
