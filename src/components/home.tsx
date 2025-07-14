@@ -6,7 +6,10 @@ const Home = () => {
 
   return (
     <div className="w-full max-w-2xl text-center">
-      <h1 className="mb-3 text-3xl font-bold">Project Pilot</h1>
+      <h1 className="mb-3 text-3xl font-bold">
+        <span className="text-primary">P</span>roject{" "}
+        <span className="text-primary">P</span>ilot
+      </h1>
 
       <p className="text-sm">
         Quer iniciar um novo projeto mas não tem ideia do que fazer? Deixe com a
@@ -18,7 +21,7 @@ const Home = () => {
         codando.
       </p>
 
-      <Button className="mt-5" onClick={() => setCurrentStep(1)}>
+      <Button className="mt-5 font-bold" onClick={() => setCurrentStep(1)}>
         Começar
       </Button>
     </div>
