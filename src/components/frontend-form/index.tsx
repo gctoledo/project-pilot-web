@@ -1,4 +1,4 @@
-import FormActions from "./form-actions";
+import FormActions from "../form-actions";
 import {
   Select,
   SelectContent,

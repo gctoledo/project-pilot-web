@@ -1,7 +1,7 @@
 import { ProjectType } from "@/types/project_types";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useFormStore } from "@/store/useFormStore";
-import FormActions from "./form-actions";
+import FormActions from "../form-actions";
 import { motion } from "framer-motion";
 
 const PROJECT_TYPES_OPTIONS = [
@@ -22,6 +22,13 @@ const PROJECT_TYPES_OPTIONS = [
 const ProjectTypeForm = () => {
   const setType = useFormStore((state) => state.setType);
   const actType = useFormStore((state) => state.type);
+  const setCurrentStep = useFormStore((state) => state.setCurrentStep);
+
+  const handleNext = () => {
+    if (actType === ProjectType.backend) {
+      setCurrentStep(3);
+    }
+  };
 
   return (
     <motion.div
@@ -46,7 +53,7 @@ const ProjectTypeForm = () => {
         ))}
       </div>
 
-      <FormActions />
+      <FormActions onNext={handleNext} />
     </motion.div>
   );
 };

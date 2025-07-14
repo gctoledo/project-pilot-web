@@ -1,7 +1,7 @@
 import { useFormStore } from "../useFormStore";
 
 export const MIN_STEP = 0;
-export const MAX_STEP = 2;
+export const MAX_STEP = 3;
 
 export interface FormStepSlice {
   currentStep: number;
