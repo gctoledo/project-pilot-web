@@ -5,9 +5,12 @@ import { useForm } from "react-hook-form";
 import z from "zod/v4";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFormStore } from "@/store/useFormStore";
+import { STEPS } from "@/store/slices/stepSlice";
 
 const descriptionFormSchema = z.object({
-  description: z.string(),
+  description: z
+    .string()
+    .max(300, "Descrição não pode ultrapassar 300 caracteres"),
 });
 
 type DescriptionFormSchema = z.infer<typeof descriptionFormSchema>;
@@ -15,6 +18,7 @@ type DescriptionFormSchema = z.infer<typeof descriptionFormSchema>;
 const DescriptionForm = () => {
   const description = useFormStore((state) => state.overview.description);
   const setDescription = useFormStore((state) => state.setOverview.description);
+  const step = useFormStore((state) => state.currentStep);
 
   const form = useForm<DescriptionFormSchema>({
     resolver: zodResolver(descriptionFormSchema),
@@ -23,6 +27,15 @@ const DescriptionForm = () => {
       description,
     },
   });
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    form.setValue("description", value);
+    form.trigger("description");
+    setDescription(value);
+  };
+
+  const nextIsDisabled = !form.formState.isValid && step === STEPS.description;
 
   return (
     <motion.div
@@ -42,10 +55,16 @@ const DescriptionForm = () => {
         className="mb-4"
         placeholder="Gostaria de utilizar Vitest para realizar testes automatizados no projeto..."
         {...form.register("description")}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={handleChange}
       />
 
-      <FormActions />
+      {form.formState.errors.description && (
+        <p className="text-center text-sm text-red-500">
+          {form.formState.errors.description.message}
+        </p>
+      )}
+
+      <FormActions nextIsDisabled={nextIsDisabled} />
     </motion.div>
   );
 };

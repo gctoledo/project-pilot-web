@@ -5,7 +5,11 @@ import { MAX_STEP, STEPS } from "@/store/slices/stepSlice";
 import ClearFormButton from "./clear-form-button";
 import GenerateResultButton from "./generate-result-button";
 
-const FormActions = () => {
+interface FormActionsProps {
+  nextIsDisabled?: boolean;
+}
+
+const FormActions = ({ nextIsDisabled }: FormActionsProps) => {
   const back = useFormStore((state) => state.back);
   const next = useFormStore((state) => state.next);
   const currentStep = useFormStore((state) => state.currentStep);
@@ -35,6 +39,8 @@ const FormActions = () => {
           variant={"ghost"}
           className="flex cursor-pointer items-center gap-2 text-sm"
           onClick={() => next()}
+          disabled={nextIsDisabled}
+          type="button"
         >
           Continuar
           <ArrowRight size={20} />
