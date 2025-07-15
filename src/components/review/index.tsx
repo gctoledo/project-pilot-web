@@ -29,7 +29,7 @@ const Review = () => {
       {type !== "backend" && (
         <>
           <div className="space-y-3 pl-2">
-            <p className="text-primary font-bold">
+            <p className="text-primary text-center font-bold">
               {FRONTEND_TECHNOLOGIES_LABEL[frontend.technology]}
               {frontend.typescript && (
                 <span className="text-foreground">
