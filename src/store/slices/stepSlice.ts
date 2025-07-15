@@ -2,7 +2,7 @@ import { ProjectType } from "@/types/project_types";
 import { useFormStore } from "../useFormStore";
 
 export const MIN_STEP = 0;
-export const MAX_STEP = 3;
+export const MAX_STEP = 4;
 
 export const STEPS = {
   initial: MIN_STEP,
@@ -31,7 +31,7 @@ export const createFormStepSlice = (): FormStepSlice => ({
         state.currentStep === STEPS.projectType
       ) {
         return {
-          currentStep: STEPS.review,
+          currentStep: STEPS.backend,
         };
       }
 
@@ -57,6 +57,15 @@ export const createFormStepSlice = (): FormStepSlice => ({
       ) {
         return {
           currentStep: STEPS.projectType,
+        };
+      }
+
+      if (
+        state.type === ProjectType.frontend &&
+        state.currentStep === STEPS.review
+      ) {
+        return {
+          currentStep: STEPS.frontend,
         };
       }
 

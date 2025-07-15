@@ -1,3 +1,4 @@
+import BackendForm from "./components/backend-form";
 import FrontendForm from "./components/frontend-form";
 import Home from "./components/home";
 import ProjectTypeForm from "./components/project-type-form";
@@ -15,6 +16,8 @@ const App = () => {
       {currentStep === STEPS.projectType && <ProjectTypeForm />}
 
       {currentStep === STEPS.frontend && <FrontendForm />}
+
+      {currentStep === STEPS.backend && <BackendForm />}
 
       {currentStep === STEPS.review && <Review />}
     </div>
