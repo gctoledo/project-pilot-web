@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { useFormStore } from "@/store/useFormStore";
 import { MAX_STEP, STEPS } from "@/store/slices/stepSlice";
 import ClearFormButton from "./clear-form-button";
+import GenerateResultButton from "./generate-result-button";
 
 const FormActions = () => {
   const back = useFormStore((state) => state.back);
@@ -28,20 +29,12 @@ const FormActions = () => {
       )}
 
       {currentStep === MAX_STEP ? (
-        <Button
-          variant={"ghost"}
-          className="flex cursor-pointer items-center gap-2 text-sm"
-          type="submit"
-        >
-          Gerar resultado
-          <ArrowRight size={20} />
-        </Button>
+        <GenerateResultButton />
       ) : (
         <Button
           variant={"ghost"}
           className="flex cursor-pointer items-center gap-2 text-sm"
           onClick={() => next()}
-          type="submit"
         >
           Continuar
           <ArrowRight size={20} />
