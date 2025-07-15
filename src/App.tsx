@@ -1,4 +1,5 @@
 import BackendForm from "./components/backend-form";
+import DescriptionForm from "./components/description-form";
 import FrontendForm from "./components/frontend-form";
 import Home from "./components/home";
 import ProjectTypeForm from "./components/project-type-form";
@@ -11,15 +12,19 @@ const App = () => {
 
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center p-4">
-      {currentStep === STEPS.initial && <Home />}
+      <div className="w-full max-w-lg">
+        {currentStep === STEPS.initial && <Home />}
 
-      {currentStep === STEPS.projectType && <ProjectTypeForm />}
+        {currentStep === STEPS.projectType && <ProjectTypeForm />}
 
-      {currentStep === STEPS.frontend && <FrontendForm />}
+        {currentStep === STEPS.frontend && <FrontendForm />}
 
-      {currentStep === STEPS.backend && <BackendForm />}
+        {currentStep === STEPS.backend && <BackendForm />}
 
-      {currentStep === STEPS.review && <Review />}
+        {currentStep === STEPS.description && <DescriptionForm />}
+
+        {currentStep === STEPS.review && <Review />}
+      </div>
     </div>
   );
 };

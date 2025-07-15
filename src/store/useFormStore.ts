@@ -5,30 +5,33 @@ import {
   type FormStepSlice,
 } from "./slices/stepSlice";
 import {
-  createProjectTypeSlice,
-  type ProjectTypeSlice,
-} from "./slices/typeSlice";
-import {
   createFrontendSlice,
   type FrontendSlice,
 } from "./slices/frontendSlice";
-import { ProjectType } from "@/types/project_types";
 import { FrontendTechnologies } from "@/types/frontend_technologies";
+import { ProjectType } from "@/types/project_overview";
+import {
+  createProjectOverviewSlice,
+  type ProjectOverviewSlice,
+} from "./slices/overviewSlice";
 
 export type FormState = FormStepSlice &
-  ProjectTypeSlice &
+  ProjectOverviewSlice &
   FrontendSlice & {
     reset: () => void;
   };
 
 export const useFormStore = create<FormState>(() => ({
   ...createFormStepSlice(),
-  ...createProjectTypeSlice(),
+  ...createProjectOverviewSlice(),
   ...createFrontendSlice(),
 
   reset: () => {
     createFormStepSlice().setCurrentStep(STEPS.initial);
-    createProjectTypeSlice().setType(ProjectType.frontend);
+
+    createProjectOverviewSlice().setType(ProjectType.frontend);
+    createProjectOverviewSlice().setDescription("");
+
     createFrontendSlice().setFrontend.technology(
       FrontendTechnologies.html_css_js,
     );

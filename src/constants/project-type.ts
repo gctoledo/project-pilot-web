@@ -1,4 +1,4 @@
-import { ProjectType } from "@/types/project_types";
+import { ProjectType } from "@/types/project_overview";
 
 export const PROJECT_TYPE_LABEL = {
   [ProjectType.frontend]: "Front-end",

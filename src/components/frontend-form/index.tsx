@@ -9,7 +9,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import z from "zod";
+import z from "zod/v4";
 import {
   ExtraFrontendTechnologies,
   FrontendTechnologies,
@@ -52,7 +52,7 @@ const FrontendForm = () => {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <form className="space-y-5">
+      <div className="space-y-5">
         <h2 className="text-center text-lg">
           Qual tecnologia <span className="text-primary">front-end</span> deseja
           utilizar?
@@ -152,7 +152,7 @@ const FrontendForm = () => {
         </div>
 
         <FormActions />
-      </form>
+      </div>
     </motion.div>
   );
 };

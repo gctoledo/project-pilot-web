@@ -19,13 +19,14 @@ const Home = () => {
       </h1>
 
       <p className="text-sm">
-        Quer iniciar um novo projeto mas não tem ideia do que fazer? Deixe com a
-        gente.
+        Quer iniciar um <span className="text-primary">novo projeto</span> mas
+        não tem ideia do que fazer?
       </p>
 
       <p className="text-sm">
-        Gaste menos tempo criando ideias e escopos de projetos e use esse tempo
-        codando.
+        Gaste menos tempo criando ideias e escopos de projetos de estudo e use
+        esse tempo codando.{" "}
+        <span className="text-primary">O resto nós cuidamos pra você!</span> 🚀
       </p>
 
       <Button

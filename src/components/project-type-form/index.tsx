@@ -2,8 +2,8 @@ import { Button } from "../ui/button";
 import { useFormStore } from "@/store/useFormStore";
 import FormActions from "../form-actions";
 import { motion } from "framer-motion";
-import { ProjectType } from "@/types/project_types";
 import { PROJECT_TYPE_LABEL } from "@/constants/project-type";
+import { ProjectType } from "@/types/project_overview";
 
 const ProjectTypeForm = () => {
   const setType = useFormStore((state) => state.setType);
@@ -20,7 +20,7 @@ const ProjectTypeForm = () => {
         Qual tipo de projeto você quer criar?
       </h2>
 
-      <div className="flex items-center gap-4">
+      <div className="flex w-full items-center justify-center gap-4">
         {Object.values(ProjectType).map((option) => (
           <Button
             key={option}
