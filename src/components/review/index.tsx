@@ -6,7 +6,7 @@ import { FRONTEND_TECHNOLOGIES_LABEL } from "@/constants/frontend";
 import { PROJECT_TYPE_LABEL } from "@/constants/project-overview";
 
 const Review = () => {
-  const type = useFormStore((state) => state.type);
+  const type = useFormStore((state) => state.overview.type);
   const frontend = useFormStore((state) => state.frontend);
 
   return (
