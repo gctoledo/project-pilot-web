@@ -24,8 +24,8 @@ const Home = () => {
       </p>
 
       <p className="text-sm">
-        Gaste menos tempo criando ideias e escopos de projetos de estudo e use
-        esse tempo codando.{" "}
+        Gaste menos tempo pensando em ideias de projetos para estudo e use esse
+        tempo codando.{" "}
         <span className="text-primary">O resto nós cuidamos pra você!</span> 🚀
       </p>
 

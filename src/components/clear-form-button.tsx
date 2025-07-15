@@ -32,9 +32,7 @@ const ClearFormButton = () => {
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>
-            Deseja realmente recomeçar o formulário?
-          </AlertDialogTitle>
+          <AlertDialogTitle>Deseja realmente recomeçar?</AlertDialogTitle>
 
           <AlertDialogDescription>
             Todos os dados inseridos no formulário serão perdidos.

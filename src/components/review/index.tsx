@@ -3,7 +3,7 @@ import FormActions from "../form-actions";
 import { motion } from "framer-motion";
 import InfoCard from "./components/info-card";
 import { FRONTEND_TECHNOLOGIES_LABEL } from "@/constants/frontend";
-import { PROJECT_TYPE_LABEL } from "@/constants/project-type";
+import { PROJECT_TYPE_LABEL } from "@/constants/project-overview";
 
 const Review = () => {
   const type = useFormStore((state) => state.type);

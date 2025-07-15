@@ -1,21 +1,51 @@
-import { ProjectType } from "@/types/project_overview";
+import { ProjectLevel, ProjectType } from "@/types/project_overview";
 import { useFormStore } from "../useFormStore";
 
 export interface ProjectOverviewSlice {
-  type: ProjectType;
-  setType: (type: ProjectType) => void;
-  description: string;
-  setDescription: (description: string) => void;
+  overview: {
+    type: ProjectType;
+    description: string;
+    level: ProjectLevel;
+  };
+
+  setOverview: {
+    type: (type: ProjectType) => void;
+    description: (description: string) => void;
+    level: (level: ProjectLevel) => void;
+  };
 }
 
 export const createProjectOverviewSlice = (): ProjectOverviewSlice => ({
-  type: ProjectType.frontend,
-  setType: (type) => {
-    useFormStore.setState({ type });
+  overview: {
+    type: ProjectType.frontend,
+    description: "",
+    level: ProjectLevel.junior,
   },
 
-  description: "",
-  setDescription: (description) => {
-    useFormStore.setState({ description });
+  setOverview: {
+    type: (type) => {
+      useFormStore.setState((state) => ({
+        overview: {
+          ...state.overview,
+          type,
+        },
+      }));
+    },
+    description: (description) => {
+      useFormStore.setState((state) => ({
+        overview: {
+          ...state.overview,
+          description,
+        },
+      }));
+    },
+    level: (level) => {
+      useFormStore.setState((state) => ({
+        overview: {
+          ...state.overview,
+          level,
+        },
+      }));
+    },
   },
 });

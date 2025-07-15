@@ -2,12 +2,12 @@ import { Button } from "../ui/button";
 import { useFormStore } from "@/store/useFormStore";
 import FormActions from "../form-actions";
 import { motion } from "framer-motion";
-import { ProjectType } from "@/types/project_overview";
-import { PROJECT_TYPE_LABEL } from "@/constants/project-overview";
+import { ProjectLevel } from "@/types/project_overview";
+import { PROJECT_LEVEL_LABEL } from "@/constants/project-overview";
 
-const ProjectTypeForm = () => {
-  const setType = useFormStore((state) => state.setOverview.type);
-  const type = useFormStore((state) => state.overview.type);
+const ProjectLevelForm = () => {
+  const level = useFormStore((state) => state.overview.level);
+  const setLevel = useFormStore((state) => state.setOverview.level);
 
   return (
     <motion.div
@@ -17,17 +17,18 @@ const ProjectTypeForm = () => {
       className="space-y-4"
     >
       <h2 className="text-center text-lg">
-        Qual tipo de projeto você quer criar?
+        Qual seu nível de <span className="text-primary">conhecimento</span> em
+        programação?
       </h2>
 
       <div className="flex w-full items-center justify-center gap-4">
-        {Object.values(ProjectType).map((option) => (
+        {Object.values(ProjectLevel).map((option) => (
           <Button
             key={option}
-            onClick={() => setType(option)}
-            variant={type === option ? "default" : "outline"}
+            onClick={() => setLevel(option)}
+            variant={level === option ? "default" : "outline"}
           >
-            {PROJECT_TYPE_LABEL[option]}
+            {PROJECT_LEVEL_LABEL[option]}
           </Button>
         ))}
       </div>
@@ -37,4 +38,4 @@ const ProjectTypeForm = () => {
   );
 };
 
-export default ProjectTypeForm;
+export default ProjectLevelForm;

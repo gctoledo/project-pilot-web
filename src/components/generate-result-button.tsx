@@ -4,11 +4,11 @@ import { useFormStore } from "@/store/useFormStore";
 
 const GenerateResultButton = () => {
   const frontend = useFormStore((state) => state.frontend);
-  const type = useFormStore((state) => state.type);
+  const overview = useFormStore((state) => state.overview);
 
   const handleGenerateResult = () => {
     console.log({
-      type,
+      overview,
       frontend,
     });
   };

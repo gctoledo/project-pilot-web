@@ -9,7 +9,7 @@ import {
   type FrontendSlice,
 } from "./slices/frontendSlice";
 import { FrontendTechnologies } from "@/types/frontend_technologies";
-import { ProjectType } from "@/types/project_overview";
+import { ProjectLevel, ProjectType } from "@/types/project_overview";
 import {
   createProjectOverviewSlice,
   type ProjectOverviewSlice,
@@ -29,8 +29,9 @@ export const useFormStore = create<FormState>(() => ({
   reset: () => {
     createFormStepSlice().setCurrentStep(STEPS.initial);
 
-    createProjectOverviewSlice().setType(ProjectType.frontend);
-    createProjectOverviewSlice().setDescription("");
+    createProjectOverviewSlice().setOverview.type(ProjectType.frontend);
+    createProjectOverviewSlice().setOverview.description("");
+    createProjectOverviewSlice().setOverview.level(ProjectLevel.junior);
 
     createFrontendSlice().setFrontend.technology(
       FrontendTechnologies.html_css_js,

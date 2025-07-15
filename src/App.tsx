@@ -2,6 +2,7 @@ import BackendForm from "./components/backend-form";
 import DescriptionForm from "./components/description-form";
 import FrontendForm from "./components/frontend-form";
 import Home from "./components/home";
+import ProjectLevelForm from "./components/project-level-form";
 import ProjectTypeForm from "./components/project-type-form";
 import Review from "./components/review";
 import { STEPS } from "./store/slices/stepSlice";
@@ -16,6 +17,8 @@ const App = () => {
         {currentStep === STEPS.initial && <Home />}
 
         {currentStep === STEPS.projectType && <ProjectTypeForm />}
+
+        {currentStep === STEPS.level && <ProjectLevelForm />}
 
         {currentStep === STEPS.frontend && <FrontendForm />}
 

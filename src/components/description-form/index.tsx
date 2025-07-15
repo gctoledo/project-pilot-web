@@ -13,8 +13,8 @@ const descriptionFormSchema = z.object({
 type DescriptionFormSchema = z.infer<typeof descriptionFormSchema>;
 
 const DescriptionForm = () => {
-  const description = useFormStore((state) => state.description);
-  const setDescription = useFormStore((state) => state.setDescription);
+  const description = useFormStore((state) => state.overview.description);
+  const setDescription = useFormStore((state) => state.setOverview.description);
 
   const form = useForm<DescriptionFormSchema>({
     resolver: zodResolver(descriptionFormSchema),
