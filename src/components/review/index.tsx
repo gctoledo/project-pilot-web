@@ -2,8 +2,8 @@ import { useFormStore } from "@/store/useFormStore";
 import FormActions from "../form-actions";
 import { motion } from "framer-motion";
 import InfoCard from "./components/info-card";
-import { Dot } from "lucide-react";
 import { FRONTEND_TECHNOLOGIES_LABEL } from "@/constants/frontend";
+import { PROJECT_TYPE_LABEL } from "@/constants/project-type";
 
 const Review = () => {
   const type = useFormStore((state) => state.type);
@@ -17,16 +17,17 @@ const Review = () => {
       className="space-y-4"
     >
       <h2 className="text-center text-lg">
-        Revisando as informações do projeto
+        Revisando as informações do projeto...
       </h2>
 
-      {type !== "backend" && (
-        <div>
-          <h3 className="mb-3 flex items-center gap-2 text-lg">
-            <Dot size={20} />
-            Front-end
-          </h3>
+      <div className="w-full bg-white/5 py-[1px]"></div>
 
+      <h3 className="mb-3 text-center text-lg">
+        Projeto <span className="text-primary">{PROJECT_TYPE_LABEL[type]}</span>
+      </h3>
+
+      {type !== "backend" && (
+        <>
           <div className="space-y-3 pl-2">
             <p className="text-primary font-bold">
               {FRONTEND_TECHNOLOGIES_LABEL[frontend.technology]}
@@ -44,7 +45,7 @@ const Review = () => {
               ))}
             </div>
           </div>
-        </div>
+        </>
       )}
 
       <FormActions />

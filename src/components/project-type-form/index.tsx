@@ -1,23 +1,9 @@
-import { ProjectType } from "@/types/project_types";
 import { Button } from "../ui/button";
 import { useFormStore } from "@/store/useFormStore";
 import FormActions from "../form-actions";
 import { motion } from "framer-motion";
-
-const PROJECT_TYPES_OPTIONS = [
-  {
-    label: "Front-end",
-    value: ProjectType.frontend,
-  },
-  {
-    label: "Back-end",
-    value: ProjectType.backend,
-  },
-  {
-    label: "Full-stack",
-    value: ProjectType.fullstack,
-  },
-];
+import { ProjectType } from "@/types/project_types";
+import { PROJECT_TYPE_LABEL } from "@/constants/project-type";
 
 const ProjectTypeForm = () => {
   const setType = useFormStore((state) => state.setType);
@@ -35,13 +21,13 @@ const ProjectTypeForm = () => {
       </h2>
 
       <div className="flex items-center gap-4">
-        {PROJECT_TYPES_OPTIONS.map((option) => (
+        {Object.values(ProjectType).map((option) => (
           <Button
-            key={option.value}
-            onClick={() => setType(option.value)}
-            variant={actType === option.value ? "default" : "outline"}
+            key={option}
+            onClick={() => setType(option)}
+            variant={actType === option ? "default" : "outline"}
           >
-            {option.label}
+            {PROJECT_TYPE_LABEL[option]}
           </Button>
         ))}
       </div>
