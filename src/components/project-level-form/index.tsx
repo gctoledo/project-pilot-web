@@ -17,7 +17,8 @@ const ProjectLevelForm = () => {
       className="space-y-4"
     >
       <h2 className="text-center text-lg">
-        Qual seu nível de <span className="text-primary">conhecimento</span> em
+        Qual seu nível de{" "}
+        <span className="text-primary font-bold">conhecimento</span> em
         programação?
       </h2>
 

@@ -54,7 +54,8 @@ const FrontendForm = () => {
     >
       <div className="space-y-5">
         <h2 className="text-center text-lg">
-          Qual tecnologia <span className="text-primary">front-end</span> deseja
+          Qual tecnologia{" "}
+          <span className="text-primary font-bold">front-end</span> deseja
           utilizar?
         </h2>
 

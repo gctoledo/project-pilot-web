@@ -32,7 +32,7 @@ const DescriptionForm = () => {
     >
       <h2 className="mb-1 text-center text-lg">
         Você gostaria de adicionar uma{" "}
-        <span className="text-primary">descrição</span>?
+        <span className="text-primary font-bold">descrição</span>?
       </h2>
       <p className="mb-4 text-center text-sm">
         Isso pode ajudar a ter um resultado mais assertivo.

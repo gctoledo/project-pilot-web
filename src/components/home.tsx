@@ -19,15 +19,18 @@ const Home = () => {
       </span>
 
       <p className="mt-2 text-sm">
-        Quer iniciar um <span className="text-primary">novo projeto</span> mas
-        não tem ideia do que fazer?
+        Quer iniciar um{" "}
+        <span className="text-primary font-bold">novo projeto</span> mas não tem
+        ideia do que fazer?
       </p>
 
       <p className="text-sm">
         Gaste menos tempo pensando em ideias e use esse tempo codando.
       </p>
 
-      <p className="text-primary mt-1">O resto nós cuidamos pra você! 🚀</p>
+      <p className="text-primary mt-1 font-bold">
+        O resto nós cuidamos pra você! 🚀
+      </p>
 
       <Button
         className="mt-5 font-bold"

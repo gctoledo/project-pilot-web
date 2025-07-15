@@ -23,7 +23,10 @@ const Review = () => {
       <div className="w-full bg-white/5 py-[1px]"></div>
 
       <h3 className="mb-3 text-center text-lg">
-        Projeto <span className="text-primary">{PROJECT_TYPE_LABEL[type]}</span>
+        Projeto{" "}
+        <span className="text-primary font-bold">
+          {PROJECT_TYPE_LABEL[type]}
+        </span>
       </h3>
 
       {type !== "backend" && (
