@@ -8,7 +8,7 @@ import Review from "./components/review";
 import { STEPS } from "./store/slices/stepSlice";
 import { useFormStore } from "./store/useFormStore";
 import { FormProvider, useForm } from "react-hook-form";
-import { formSchema, type FormSchema } from "@/schemas";
+import { formSchema, type FormSchema } from "@/schemas/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   BackendTechnologies,

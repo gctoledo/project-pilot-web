@@ -17,7 +17,7 @@ import {
   FRONTEND_EXTRA_TECHNOLOGIES_LABEL,
   FRONTEND_TECHNOLOGIES_LABEL,
 } from "@/constants/frontend";
-import type { FormSchema } from "@/schemas";
+import type { FormSchema } from "@/schemas/form";
 
 const FrontendForm = () => {
   const form = useFormContext<FormSchema>();

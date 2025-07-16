@@ -5,7 +5,7 @@ import { MAX_STEP, STEPS } from "@/store/slices/stepSlice";
 import ClearFormButton from "./clear-form-button";
 import GenerateResultButton from "./generate-result-button";
 import { useFormContext } from "react-hook-form";
-import type { FormSchema } from "@/schemas";
+import type { FormSchema } from "@/schemas/form";
 
 interface FormActionsProps {
   nextIsDisabled?: boolean;

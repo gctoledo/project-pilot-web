@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ProjectLevel } from "@/types/project_overview";
 import { PROJECT_LEVEL_LABEL } from "@/constants/project-overview";
 import { useFormContext } from "react-hook-form";
-import type { FormSchema } from "@/schemas";
+import type { FormSchema } from "@/schemas/form";
 
 const ProjectLevelForm = () => {
   const form = useFormContext<FormSchema>();

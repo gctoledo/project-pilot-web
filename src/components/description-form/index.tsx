@@ -4,7 +4,7 @@ import FormActions from "../form-actions";
 import { useFormContext } from "react-hook-form";
 import { useFormStore } from "@/store/useFormStore";
 import { STEPS } from "@/store/slices/stepSlice";
-import type { FormSchema } from "@/schemas";
+import type { FormSchema } from "@/schemas/form";
 
 const DescriptionForm = () => {
   const step = useFormStore((state) => state.currentStep);

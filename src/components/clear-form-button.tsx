@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useFormStore } from "@/store/useFormStore";
 import { useFormContext } from "react-hook-form";
-import type { FormSchema } from "@/schemas";
+import type { FormSchema } from "@/schemas/form";
 
 const ClearFormButton = () => {
   const reset = useFormStore((state) => state.reset);

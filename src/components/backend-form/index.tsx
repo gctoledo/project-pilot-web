@@ -19,7 +19,7 @@ import {
   DATABASE_TECHNOLOGIES_LABEL,
 } from "@/constants/backend";
 import { Checkbox } from "../ui/checkbox";
-import type { FormSchema } from "@/schemas";
+import type { FormSchema } from "@/schemas/form";
 
 const BackendForm = () => {
   const form = useFormContext<FormSchema>();

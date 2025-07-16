@@ -10,7 +10,7 @@ import {
   PROJECT_TYPE_LABEL,
 } from "@/constants/project-overview";
 import { useFormContext } from "react-hook-form";
-import type { FormSchema } from "@/schemas";
+import type { FormSchema } from "@/schemas/form";
 import { Book, LetterText, Printer, Settings } from "lucide-react";
 import {
   BACKEND_EXTRA_TECHNOLOGIES_LABEL,
