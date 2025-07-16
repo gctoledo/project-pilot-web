@@ -7,28 +7,67 @@ import ProjectTypeForm from "./components/project-type-form";
 import Review from "./components/review";
 import { STEPS } from "./store/slices/stepSlice";
 import { useFormStore } from "./store/useFormStore";
+import { FormProvider, useForm } from "react-hook-form";
+import { formSchema, type FormSchema } from "@/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  BackendTechnologies,
+  DatabaseTechnologies,
+} from "@/types/backend_technologies";
+import { FrontendTechnologies } from "@/types/frontend_technologies";
+import { ProjectLevel, ProjectType } from "@/types/project_overview";
 
 const App = () => {
   const currentStep = useFormStore((state) => state.currentStep);
 
+  const form = useForm<FormSchema>({
+    resolver: zodResolver(formSchema),
+    mode: "onChange",
+    defaultValues: {
+      backend: {
+        technology: BackendTechnologies.express_js,
+        extra_technologies: [],
+        database: DatabaseTechnologies.none,
+      },
+      frontend: {
+        technology: FrontendTechnologies.html_css_js,
+        typescript: false,
+        extra_technologies: [],
+      },
+      overview: {
+        type: ProjectType.frontend,
+        level: ProjectLevel.junior,
+        description: "",
+      },
+    },
+  });
+
+  const onSubmit = (data: FormSchema) => {
+    console.log(data);
+  };
+
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center p-4">
-      <div className="w-full max-w-lg">
-        {currentStep === STEPS.initial && <Home />}
+    <FormProvider {...form}>
+      <div className="flex h-screen w-full flex-col items-center justify-center p-4">
+        <div className="w-full max-w-lg">
+          {currentStep === STEPS.initial && <Home />}
 
-        {currentStep === STEPS.projectType && <ProjectTypeForm />}
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            {currentStep === STEPS.projectType && <ProjectTypeForm />}
 
-        {currentStep === STEPS.level && <ProjectLevelForm />}
+            {currentStep === STEPS.level && <ProjectLevelForm />}
 
-        {currentStep === STEPS.frontend && <FrontendForm />}
+            {currentStep === STEPS.frontend && <FrontendForm />}
 
-        {currentStep === STEPS.backend && <BackendForm />}
+            {currentStep === STEPS.backend && <BackendForm />}
 
-        {currentStep === STEPS.description && <DescriptionForm />}
+            {currentStep === STEPS.description && <DescriptionForm />}
 
-        {currentStep === STEPS.review && <Review />}
+            {currentStep === STEPS.review && <Review />}
+          </form>
+        </div>
       </div>
-    </div>
+    </FormProvider>
   );
 };
 

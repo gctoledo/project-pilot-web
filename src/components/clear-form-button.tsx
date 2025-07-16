@@ -13,9 +13,17 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useFormStore } from "@/store/useFormStore";
+import { useFormContext } from "react-hook-form";
+import type { FormSchema } from "@/schemas";
 
 const ClearFormButton = () => {
   const reset = useFormStore((state) => state.reset);
+  const form = useFormContext<FormSchema>();
+
+  const handleReset = () => {
+    reset();
+    form.reset();
+  };
 
   return (
     <AlertDialog>
@@ -42,9 +50,7 @@ const ClearFormButton = () => {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
 
-          <AlertDialogAction onClick={() => reset()}>
-            Continuar
-          </AlertDialogAction>
+          <AlertDialogAction onClick={handleReset}>Recomeçar</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

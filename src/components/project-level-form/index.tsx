@@ -1,13 +1,14 @@
 import { Button } from "../ui/button";
-import { useFormStore } from "@/store/useFormStore";
 import FormActions from "../form-actions";
 import { motion } from "framer-motion";
 import { ProjectLevel } from "@/types/project_overview";
 import { PROJECT_LEVEL_LABEL } from "@/constants/project-overview";
+import { useFormContext } from "react-hook-form";
+import type { FormSchema } from "@/schemas";
 
 const ProjectLevelForm = () => {
-  const level = useFormStore((state) => state.overview.level);
-  const setLevel = useFormStore((state) => state.setOverview.level);
+  const form = useFormContext<FormSchema>();
+  const level = form.watch("overview.level");
 
   return (
     <motion.div
@@ -26,7 +27,7 @@ const ProjectLevelForm = () => {
         {Object.values(ProjectLevel).map((option) => (
           <Button
             key={option}
-            onClick={() => setLevel(option)}
+            onClick={() => form.setValue("overview.level", option)}
             variant={level === option ? "default" : "outline"}
           >
             {PROJECT_LEVEL_LABEL[option]}

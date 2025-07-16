@@ -17,8 +17,8 @@ export const STEPS = {
 export interface FormStepSlice {
   currentStep: number;
   setCurrentStep: (step: number) => void;
-  next: () => void;
-  back: () => void;
+  next: (type: ProjectType) => void;
+  back: (type: ProjectType) => void;
 }
 
 export const createFormStepSlice = (): FormStepSlice => ({
@@ -26,19 +26,16 @@ export const createFormStepSlice = (): FormStepSlice => ({
   setCurrentStep: (step) => {
     useFormStore.setState({ currentStep: step });
   },
-  next: () => {
+  next: (type) => {
     useFormStore.setState((state) => {
-      if (
-        state.overview.type === ProjectType.backend &&
-        state.currentStep === STEPS.level
-      ) {
+      if (type === ProjectType.backend && state.currentStep === STEPS.level) {
         return {
           currentStep: STEPS.backend,
         };
       }
 
       if (
-        state.overview.type === ProjectType.frontend &&
+        type === ProjectType.frontend &&
         state.currentStep === STEPS.frontend
       ) {
         return {
@@ -51,19 +48,16 @@ export const createFormStepSlice = (): FormStepSlice => ({
       };
     });
   },
-  back: () => {
+  back: (type) => {
     useFormStore.setState((state) => {
-      if (
-        state.overview.type === ProjectType.backend &&
-        state.currentStep === STEPS.backend
-      ) {
+      if (type === ProjectType.backend && state.currentStep === STEPS.backend) {
         return {
           currentStep: STEPS.level,
         };
       }
 
       if (
-        state.overview.type === ProjectType.frontend &&
+        type === ProjectType.frontend &&
         state.currentStep === STEPS.description
       ) {
         return {

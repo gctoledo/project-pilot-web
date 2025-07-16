@@ -1,13 +1,15 @@
-import { useFormStore } from "@/store/useFormStore";
 import FormActions from "../form-actions";
 import { motion } from "framer-motion";
 import InfoCard from "./components/info-card";
 import { FRONTEND_TECHNOLOGIES_LABEL } from "@/constants/frontend";
 import { PROJECT_TYPE_LABEL } from "@/constants/project-overview";
+import { useFormContext } from "react-hook-form";
+import type { FormSchema } from "@/schemas";
 
 const Review = () => {
-  const type = useFormStore((state) => state.overview.type);
-  const frontend = useFormStore((state) => state.frontend);
+  const form = useFormContext<FormSchema>();
+  const type = form.getValues("overview.type");
+  const frontend = form.getValues("frontend");
 
   return (
     <motion.div

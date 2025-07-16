@@ -7,44 +7,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import z from "zod/v4";
+import { Controller, useFormContext } from "react-hook-form";
 import {
   ExtraFrontendTechnologies,
   FrontendTechnologies,
 } from "@/types/frontend_technologies";
-import { useFormStore } from "@/store/useFormStore";
 import { motion } from "framer-motion";
 import {
   FRONTEND_EXTRA_TECHNOLOGIES_LABEL,
   FRONTEND_TECHNOLOGIES_LABEL,
 } from "@/constants/frontend";
-
-const ExtraFrontendTechnologiesSchema = z.enum(
-  Object.values(ExtraFrontendTechnologies),
-);
-
-const frontendFormSchema = z.object({
-  technology: z.enum(Object.values(FrontendTechnologies)),
-  typescript: z.boolean(),
-  extra_technologies: z.array(ExtraFrontendTechnologiesSchema),
-});
-
-type FrontendFormSchema = z.infer<typeof frontendFormSchema>;
+import type { FormSchema } from "@/schemas";
 
 const FrontendForm = () => {
-  const frontend = useFormStore((state) => state.frontend);
-  const setFrontend = useFormStore((state) => state.setFrontend);
-
-  const form = useForm<FrontendFormSchema>({
-    resolver: zodResolver(frontendFormSchema),
-    defaultValues: {
-      technology: frontend.technology,
-      typescript: frontend.typescript,
-      extra_technologies: frontend.extra_technologies,
-    },
-  });
+  const form = useFormContext<FormSchema>();
 
   return (
     <motion.div
@@ -60,16 +36,10 @@ const FrontendForm = () => {
         </h2>
 
         <Controller
-          name="technology"
+          name="frontend.technology"
           control={form.control}
           render={({ field }) => (
-            <Select
-              onValueChange={(value) => {
-                field.onChange(value);
-                setFrontend.technology(value as FrontendTechnologies);
-              }}
-              value={field.value}
-            >
+            <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Selecione uma tecnologia" />
               </SelectTrigger>
@@ -85,16 +55,13 @@ const FrontendForm = () => {
         />
 
         <Controller
-          name="typescript"
+          name="frontend.typescript"
           control={form.control}
           render={({ field }) => (
             <div className="flex items-center gap-2">
               <Checkbox
-                checked={field.value}
-                onCheckedChange={(checked) => {
-                  field.onChange(!!checked);
-                  setFrontend.typescript(!!checked);
-                }}
+                checked={!!field.value}
+                onCheckedChange={field.onChange}
                 id="typescript"
               />
               <label className="text-sm" htmlFor="typescript">
@@ -113,23 +80,18 @@ const FrontendForm = () => {
             {Object.values(ExtraFrontendTechnologies).map((option) => (
               <Controller
                 key={option}
-                name="extra_technologies"
+                name="frontend.extra_technologies"
                 control={form.control}
                 render={({ field }) => {
                   const isChecked = field.value?.includes(option);
                   const handleChange = (checked: boolean) => {
                     if (checked) {
                       field.onChange([...(field.value || []), option]);
-                      setFrontend.extra_technologies([
-                        ...(field.value || []),
-                        option,
-                      ]);
                     } else {
                       field.onChange(
-                        (field.value || []).filter((v) => v !== option),
-                      );
-                      setFrontend.extra_technologies(
-                        (field.value || []).filter((v) => v !== option),
+                        (field.value || []).filter(
+                          (v: ExtraFrontendTechnologies) => v !== option,
+                        ),
                       );
                     }
                   };
@@ -137,7 +99,7 @@ const FrontendForm = () => {
                   return (
                     <div className="flex items-center gap-2">
                       <Checkbox
-                        checked={isChecked}
+                        checked={!!isChecked}
                         onCheckedChange={(checked) => handleChange(!!checked)}
                         id={option}
                       />

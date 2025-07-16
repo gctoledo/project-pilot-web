@@ -1,41 +1,18 @@
 import { motion } from "framer-motion";
 import { Textarea } from "../ui/textarea";
 import FormActions from "../form-actions";
-import { useForm } from "react-hook-form";
-import z from "zod/v4";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useFormContext } from "react-hook-form";
 import { useFormStore } from "@/store/useFormStore";
 import { STEPS } from "@/store/slices/stepSlice";
-
-const descriptionFormSchema = z.object({
-  description: z
-    .string()
-    .max(300, "Descrição não pode ultrapassar 300 caracteres"),
-});
-
-type DescriptionFormSchema = z.infer<typeof descriptionFormSchema>;
+import type { FormSchema } from "@/schemas";
 
 const DescriptionForm = () => {
-  const description = useFormStore((state) => state.overview.description);
-  const setDescription = useFormStore((state) => state.setOverview.description);
   const step = useFormStore((state) => state.currentStep);
 
-  const form = useForm<DescriptionFormSchema>({
-    resolver: zodResolver(descriptionFormSchema),
-    mode: "onChange",
-    defaultValues: {
-      description,
-    },
-  });
+  const form = useFormContext<FormSchema>();
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    form.setValue("description", value);
-    form.trigger("description");
-    setDescription(value);
-  };
-
-  const nextIsDisabled = !form.formState.isValid && step === STEPS.description;
+  const nextIsDisabled =
+    form.formState.errors.overview?.description && step === STEPS.description;
 
   const DESCRIPTION_PLACEHOLDER = `
 Ex:
@@ -61,13 +38,12 @@ Ex:
       <Textarea
         className="mb-4"
         placeholder={DESCRIPTION_PLACEHOLDER}
-        {...form.register("description")}
-        onChange={handleChange}
+        {...form.register("overview.description")}
       />
 
-      {form.formState.errors.description && (
+      {form.formState.errors.overview?.description && (
         <p className="text-center text-sm text-red-500">
-          {form.formState.errors.description.message}
+          {form.formState.errors.overview?.description?.message}
         </p>
       )}
 

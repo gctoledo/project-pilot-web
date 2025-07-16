@@ -5,9 +5,7 @@ import {
 } from "@/types/backend_technologies";
 import FormActions from "../form-actions";
 import { motion } from "framer-motion";
-import { z } from "zod/v4";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useFormContext } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -15,38 +13,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useFormStore } from "@/store/useFormStore";
 import {
   BACKEND_EXTRA_TECHNOLOGIES_LABEL,
   BACKEND_TECHNOLOGIES_LABEL,
   DATABASE_TECHNOLOGIES_LABEL,
 } from "@/constants/backend";
 import { Checkbox } from "../ui/checkbox";
-
-const ExtraBackendTechnologiesSchema = z.enum(
-  Object.values(ExtraBackendTechnologies),
-);
-
-const backendFormSchema = z.object({
-  technology: z.enum(Object.values(BackendTechnologies)),
-  database: z.enum(Object.values(DatabaseTechnologies)),
-  extra_technologies: z.array(ExtraBackendTechnologiesSchema),
-});
-
-type BackendFormSchema = z.infer<typeof backendFormSchema>;
+import type { FormSchema } from "@/schemas";
 
 const BackendForm = () => {
-  const backend = useFormStore((state) => state.backend);
-  const setBackend = useFormStore((state) => state.setBackend);
-
-  const form = useForm<BackendFormSchema>({
-    resolver: zodResolver(backendFormSchema),
-    defaultValues: {
-      technology: backend.technology,
-      extra_technologies: backend.extra_technologies,
-      database: backend.database,
-    },
-  });
+  const form = useFormContext<FormSchema>();
 
   return (
     <motion.div
@@ -62,16 +38,10 @@ const BackendForm = () => {
         </h2>
 
         <Controller
-          name="technology"
+          name="backend.technology"
           control={form.control}
           render={({ field }) => (
-            <Select
-              onValueChange={(value) => {
-                field.onChange(value);
-                setBackend.technology(value as BackendTechnologies);
-              }}
-              value={field.value}
-            >
+            <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Selecione uma tecnologia" />
               </SelectTrigger>
@@ -91,16 +61,10 @@ const BackendForm = () => {
         </p>
 
         <Controller
-          name="database"
+          name="backend.database"
           control={form.control}
           render={({ field }) => (
-            <Select
-              onValueChange={(value) => {
-                field.onChange(value);
-                setBackend.database(value as DatabaseTechnologies);
-              }}
-              value={field.value}
-            >
+            <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Selecione um banco de dados" />
               </SelectTrigger>
@@ -124,23 +88,18 @@ const BackendForm = () => {
             {Object.values(ExtraBackendTechnologies).map((option) => (
               <Controller
                 key={option}
-                name="extra_technologies"
+                name="backend.extra_technologies"
                 control={form.control}
                 render={({ field }) => {
                   const isChecked = field.value?.includes(option);
                   const handleChange = (checked: boolean) => {
                     if (checked) {
                       field.onChange([...(field.value || []), option]);
-                      setBackend.extra_technologies([
-                        ...(field.value || []),
-                        option,
-                      ]);
                     } else {
                       field.onChange(
-                        (field.value || []).filter((v) => v !== option),
-                      );
-                      setBackend.extra_technologies(
-                        (field.value || []).filter((v) => v !== option),
+                        (field.value || []).filter(
+                          (v: ExtraBackendTechnologies) => v !== option,
+                        ),
                       );
                     }
                   };
@@ -148,7 +107,7 @@ const BackendForm = () => {
                   return (
                     <div className="flex items-center gap-2">
                       <Checkbox
-                        checked={isChecked}
+                        checked={!!isChecked}
                         onCheckedChange={(checked) => handleChange(!!checked)}
                         id={option}
                       />

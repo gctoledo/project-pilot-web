@@ -4,6 +4,8 @@ import { useFormStore } from "@/store/useFormStore";
 import { MAX_STEP, STEPS } from "@/store/slices/stepSlice";
 import ClearFormButton from "./clear-form-button";
 import GenerateResultButton from "./generate-result-button";
+import { useFormContext } from "react-hook-form";
+import type { FormSchema } from "@/schemas";
 
 interface FormActionsProps {
   nextIsDisabled?: boolean;
@@ -13,6 +15,7 @@ const FormActions = ({ nextIsDisabled }: FormActionsProps) => {
   const back = useFormStore((state) => state.back);
   const next = useFormStore((state) => state.next);
   const currentStep = useFormStore((state) => state.currentStep);
+  const form = useFormContext<FormSchema>();
 
   const isClearFormButton = currentStep === STEPS.projectType;
 
@@ -24,7 +27,7 @@ const FormActions = ({ nextIsDisabled }: FormActionsProps) => {
         <Button
           variant={"ghost"}
           className="flex cursor-pointer items-center gap-2 text-sm"
-          onClick={() => back()}
+          onClick={() => back(form.getValues("overview.type"))}
           type="button"
         >
           <ArrowLeft size={20} />
@@ -38,7 +41,7 @@ const FormActions = ({ nextIsDisabled }: FormActionsProps) => {
         <Button
           variant={"ghost"}
           className="flex cursor-pointer items-center gap-2 text-sm"
-          onClick={() => next()}
+          onClick={() => next(form.getValues("overview.type"))}
           disabled={nextIsDisabled}
           type="button"
         >
