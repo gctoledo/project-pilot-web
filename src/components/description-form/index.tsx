@@ -37,6 +37,13 @@ const DescriptionForm = () => {
 
   const nextIsDisabled = !form.formState.isValid && step === STEPS.description;
 
+  const DESCRIPTION_PLACEHOLDER = `
+Ex:
+- No back-end, utilizar Jest para testes automatizados;
+- No front-end, utilizar Context API para gerenciamento de estado;
+- No front-end, utilizar React Router para roteamento.
+  `.trim();
+
   return (
     <motion.div
       initial={{ x: -100, opacity: 0 }}
@@ -53,7 +60,7 @@ const DescriptionForm = () => {
 
       <Textarea
         className="mb-4"
-        placeholder="Gostaria de utilizar Vitest para realizar testes automatizados no projeto..."
+        placeholder={DESCRIPTION_PLACEHOLDER}
         {...form.register("description")}
         onChange={handleChange}
       />
