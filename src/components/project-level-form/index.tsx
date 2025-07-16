@@ -29,6 +29,7 @@ const ProjectLevelForm = () => {
             key={option}
             onClick={() => form.setValue("overview.level", option)}
             variant={level === option ? "default" : "outline"}
+            type="button"
           >
             {PROJECT_LEVEL_LABEL[option]}
           </Button>
