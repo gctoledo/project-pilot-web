@@ -12,4 +12,5 @@ export const frontendFormSchema = z.object({
   technology: z.enum(Object.values(FrontendTechnologies)),
   typescript: z.boolean(),
   extra_technologies: z.array(ExtraFrontendTechnologiesSchema),
+  tests: z.boolean(),
 });

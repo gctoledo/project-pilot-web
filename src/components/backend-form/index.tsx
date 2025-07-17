@@ -122,6 +122,23 @@ const BackendForm = () => {
           </div>
         </div>
 
+        <Controller
+          name="backend.tests"
+          control={form.control}
+          render={({ field }) => (
+            <div className="flex items-center gap-2">
+              <Checkbox
+                checked={!!field.value}
+                onCheckedChange={field.onChange}
+                id="tests"
+              />
+              <label className="text-sm" htmlFor="tests">
+                Deseja criar testes automatizados?
+              </label>
+            </div>
+          )}
+        />
+
         <FormActions />
       </div>
     </motion.div>

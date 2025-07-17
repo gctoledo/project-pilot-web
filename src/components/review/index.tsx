@@ -71,7 +71,12 @@ const Review = () => {
             {frontend.typescript ? "Sim" : "Não"}
           </p>
 
-          <div className="mt-2 grid w-full grid-cols-3 gap-x-3 gap-y-2">
+          <p>
+            <strong>Testes automatizados: </strong>
+            {frontend.tests ? "Sim" : "Não"}
+          </p>
+
+          <div className="mt-2 grid w-full grid-cols-2 gap-x-3 gap-y-2 md:grid-cols-3">
             {frontend.extra_technologies.map((technology) => (
               <InfoCard
                 key={technology}
@@ -101,7 +106,12 @@ const Review = () => {
             {DATABASE_TECHNOLOGIES_LABEL[backend.database]}
           </p>
 
-          <div className="mt-2 grid w-full grid-cols-3 gap-x-3 gap-y-2">
+          <p>
+            <strong>Testes automatizados: </strong>
+            {backend.tests ? "Sim" : "Não"}
+          </p>
+
+          <div className="mt-2 grid w-full grid-cols-2 gap-x-3 gap-y-2 md:grid-cols-3">
             {backend.extra_technologies.map((technology) => (
               <InfoCard
                 key={technology}

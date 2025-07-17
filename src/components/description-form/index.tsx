@@ -15,9 +15,9 @@ const DescriptionForm = () => {
     form.formState.errors.overview?.description && step === STEPS.description;
 
   const DESCRIPTION_PLACEHOLDER = `
-Ex:
+Gostaria que o projeto fosse um e-commerce com um carrinho de compras e uma tela de checkout.
+
 - No back-end, utilizar Jest para testes automatizados;
-- No front-end, utilizar Context API para gerenciamento de estado;
 - No front-end, utilizar React Router para roteamento.
   `.trim();
 

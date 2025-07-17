@@ -4,7 +4,6 @@ export const FrontendTechnologies = {
   next: "next",
   svelte: "svelte",
   vue: "vue",
-  nuxt: "nuxt",
   angular: "angular",
 } as const;
 
@@ -15,6 +14,9 @@ export const ExtraFrontendTechnologies = {
   shadcn_ui: "shadcn-ui",
   sass: "sass",
   styled_components: "styled-components",
+  zustand: "zustand",
+  react_query: "react-query",
+  redux: "redux",
 } as const;
 
 export type FrontendTechnologies =

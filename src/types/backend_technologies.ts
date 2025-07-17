@@ -14,11 +14,14 @@ export const BackendTechnologies = {
 
 export const ExtraBackendTechnologies = {
   docker: "docker",
-  tests: "tests",
   rest_api: "rest-api",
   graphql: "graphql",
   websocket: "websocket",
   authentication: "authentication",
+  stripe: "stripe",
+  rabbitmq: "rabbitmq",
+  kafka: "kafka",
+  redis: "redis",
 } as const;
 
 export const DatabaseTechnologies = {

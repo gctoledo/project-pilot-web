@@ -103,7 +103,7 @@ const FrontendForm = () => {
                         onCheckedChange={(checked) => handleChange(!!checked)}
                         id={option}
                       />
-                      <label className="text-sm" htmlFor={option}>
+                      <label className="truncate text-sm" htmlFor={option}>
                         {FRONTEND_EXTRA_TECHNOLOGIES_LABEL[option]}
                       </label>
                     </div>
@@ -113,6 +113,23 @@ const FrontendForm = () => {
             ))}
           </div>
         </div>
+
+        <Controller
+          name="frontend.tests"
+          control={form.control}
+          render={({ field }) => (
+            <div className="flex items-center gap-2">
+              <Checkbox
+                checked={!!field.value}
+                onCheckedChange={field.onChange}
+                id="tests"
+              />
+              <label className="text-sm" htmlFor="tests">
+                Deseja criar testes automatizados?
+              </label>
+            </div>
+          )}
+        />
 
         <FormActions />
       </div>

@@ -28,11 +28,13 @@ const App = () => {
         technology: BackendTechnologies.express_js,
         extra_technologies: [],
         database: DatabaseTechnologies.none,
+        tests: false,
       },
       frontend: {
         technology: FrontendTechnologies.html_css_js,
         typescript: false,
         extra_technologies: [],
+        tests: false,
       },
       overview: {
         type: ProjectType.frontend,
@@ -48,7 +50,7 @@ const App = () => {
 
   return (
     <FormProvider {...form}>
-      <div className="flex h-screen w-full flex-col items-center justify-center p-4">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
         <div className="w-full max-w-lg">
           {currentStep === STEPS.initial && <Home />}
 

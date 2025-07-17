@@ -21,10 +21,13 @@ export const BACKEND_TECHNOLOGIES_LABEL = {
 export const BACKEND_EXTRA_TECHNOLOGIES_LABEL = {
   [ExtraBackendTechnologies.authentication]: "Autenticação",
   [ExtraBackendTechnologies.docker]: "Docker",
-  [ExtraBackendTechnologies.tests]: "Testes",
   [ExtraBackendTechnologies.rest_api]: "API REST",
   [ExtraBackendTechnologies.graphql]: "GraphQL",
   [ExtraBackendTechnologies.websocket]: "WebSocket",
+  [ExtraBackendTechnologies.stripe]: "Stripe",
+  [ExtraBackendTechnologies.rabbitmq]: "RabbitMQ",
+  [ExtraBackendTechnologies.kafka]: "Kafka",
+  [ExtraBackendTechnologies.redis]: "Redis",
 };
 
 export const DATABASE_TECHNOLOGIES_LABEL = {

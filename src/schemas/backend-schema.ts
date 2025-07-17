@@ -13,4 +13,5 @@ export const backendFormSchema = z.object({
   technology: z.enum(Object.values(BackendTechnologies)),
   database: z.enum(Object.values(DatabaseTechnologies)),
   extra_technologies: z.array(ExtraBackendTechnologiesSchema),
+  tests: z.boolean(),
 });
